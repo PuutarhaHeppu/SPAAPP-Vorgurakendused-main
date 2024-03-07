@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\teamtrack-frontend",
+    "\\teamtrack-frontend\\public",
+    "\\teamtrack-frontend\\public\\config",
+    "\\teamtrack-frontend\\src",
+    "\\teamtrack-frontend\\src\\components",
+    "\\teamtrack-frontend\\src\\models",
+    "\\teamtrack-frontend\\src\\router",
+    "\\teamtrack-frontend\\src\\stores",
+    "\\teamtrack-frontend\\src\\views"
+  ],
+  "SelectedNode": "\\teamtrack-frontend\\src\\components\\Navbar.vue",
+  "PreviewInSolutionExplorer": false
+}

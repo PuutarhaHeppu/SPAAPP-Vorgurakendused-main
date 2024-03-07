@@ -1,0 +1,10 @@
+{
+	"javascript.preferences.autoImportFileExcludePatterns": [
+		"@vue/runtime-core",
+		"@vue/runtime-dom"
+	],
+	"typescript.preferences.autoImportFileExcludePatterns": [
+		"@vue/runtime-core",
+		"@vue/runtime-dom"
+	]
+}
