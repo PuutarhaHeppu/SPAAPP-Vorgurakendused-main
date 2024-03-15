@@ -1,7 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-grey-50 py-12 px-4 sm:px-6 lg:px=8 text-black-300"
-  >
+    class="min-h-screen bg-grey-50 py-12 px-4 sm:px-6 lg:px=8 text-black-300">
       <div class="text-center">
           <div class="hidden md:block">
           </div>
@@ -9,7 +8,7 @@
           <DataTable :value="events" v-if="events.length > 0">
               <Column field="type" header="Nimetus" />
               <Column field="location" header="Asukoht" />
-              <Column id="Column" name="Column" header="Kuupäev" >
+              <Column id="Column" name="Column" header="Marken haiseb" >
               <template #body="{data}">
                 {{ showDate(data.date).date }}
 

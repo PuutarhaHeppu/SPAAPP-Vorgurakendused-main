@@ -1,23 +1,16 @@
 <template>
     <div
-      class="min-h-screen bg-grey-50 py-12 px-4 sm:px-6 lg:px=8 text-black-300"
-    >
+      class="min-h-screen bg-grey-50 py-12 px-4 sm:px-6 lg:px=8 text-black-300">
         <div class="text-center">
             <div class="hidden md:block">
             </div>
             <h1 class="font-bold">{{ title }}</h1>
             <DataTable :value="events" v-if="events.length > 0">
-                <Column field="type" header="Nimetus" />
+                <Column field="type" header="Id" />
                 <Column field="location" header="Asukoht" />
                 <Column id="Column" name="Column" header="Kuupäev" >
                 <template #body="{data}">
                   {{ showDate(data.date).date }}
-  
-                </template>
-                </Column>
-                <Column class="w-30" header="Kellaaeg">
-                <template #body="{data}">
-                  {{ showDate(data.date).time }}
   
                 </template>
                 </Column>

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import AddEventForm from '@/components/AddEventForm.vue';
+import AddEventForm from '@/components/UpdateEvent.vue';
 import { Event } from '@/models/event';
 import { useEventsStore } from '@/stores/eventsStore';
 import { onMounted, ref } from 'vue';

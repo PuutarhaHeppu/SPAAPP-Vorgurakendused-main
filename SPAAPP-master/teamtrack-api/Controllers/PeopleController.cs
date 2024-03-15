@@ -3,20 +3,20 @@ using teamtrack_api.Model;
 
 namespace teamtrack_api.Controllers;
 
-[ApiController] [Route("api/[controller]")] public class PeoplesController : ControllerBase {
+[ApiController] [Route("api/[controller]")] public class PeopleController : ControllerBase {
     private readonly DataContext context;
-    public PeoplesController(DataContext c)  {
+    public EventsController(DataContext c)  {
         context = c;
     }
-    [HttpGet] public IActionResult GetPeoples() {
+    [HttpGet] public IActionResult GetPeople() {
         return Ok(context.PeopleList);
     }   
     [HttpPost] public IActionResult Create([FromBody] People e) {
-        var dbPeople = context.PeopleList?.Find(e.Id); 
-        if (dbPeople == null) {
+        var dbPeopleList = context.PeopleList?.Find(e.Id); 
+        if (dbPeopleList == null) {
             context.PeopleList?.Add(e); 
             context.SaveChanges();
-            return CreatedAtAction(nameof(GetPeoples), new { e.Id }, e);
+            return CreatedAtAction(nameof(GetPeopleList), new { e.Id }, e);
         }
         return Conflict();
     }
@@ -27,9 +27,9 @@ namespace teamtrack_api.Controllers;
         return NoContent();
     }
     [HttpDelete("{id}")] public IActionResult Delete(int id) {
-        var PeopleToDelete = context.PeopleList?.Find(id);
-        if (PeopleToDelete == null) return NotFound();
-        context.PeopleList?.Remove(PeopleToDelete);
+        var PeopleListToDelete = context.PeopleList?.Find(id);
+        if (PeopleListToDelete == null) return NotFound();
+        context.PeopleList?.Remove(PeopleListToDelete);
         context.SaveChanges();
         return NoContent();
     }
