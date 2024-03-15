@@ -29,8 +29,13 @@ const routes: Array<RouteRecordRaw> = [
     component: AddEventVue,
   },
   {
-    path: '/update/',
-    name: 'muuda sündmusi',
+    path: '/eventPeople',
+    name: 'Uuenda harjutust',
+    component: UpdateEventVue,
+  },
+  {
+    path: '/update/:id',
+    name: 'Uuenda harjutust',
     component: UpdateEventVue,
   },
   {
