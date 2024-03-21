@@ -5,15 +5,15 @@ namespace teamtrack_api.Controllers;
 
 [ApiController] [Route("api/[controller]")] public class PeopleController : ControllerBase {
     private readonly DataContext context;
-    public EventsController(DataContext c)  {
+    public PeopleController(DataContext c)  {
         context = c;
     }
-    [HttpGet] public IActionResult GetPeople() {
+    [HttpGet] public IActionResult GetPeopleList() {
         return Ok(context.PeopleList);
     }   
     [HttpPost] public IActionResult Create([FromBody] People e) {
-        var dbPeopleList = context.PeopleList?.Find(e.Id); 
-        if (dbPeopleList == null) {
+        var dbEvent = context.PeopleList?.Find(e.Id); 
+        if (dbEvent == null) {
             context.PeopleList?.Add(e); 
             context.SaveChanges();
             return CreatedAtAction(nameof(GetPeopleList), new { e.Id }, e);

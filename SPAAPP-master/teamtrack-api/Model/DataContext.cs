@@ -68,24 +68,6 @@ public class DataContext: DbContext {
                 Attendance = true,
             }
         );
-        modelBuilder.Entity<EventPeople>().Property(p => p.Id).HasIdentityOptions(startValue: 1);
-        modelBuilder.Entity<EventPeople>().HasData(
-            new EventPeople{
-                Id = 1,
-                EventId = 1,
-                PeopleId = 1,
-            },
-            new EventPeople{
-                Id = 2,
-                EventId = 2,
-                PeopleId = 2,
-            },
-            new EventPeople{
-                Id = 3,
-                EventId = 3,
-                PeopleId = 3,
-            }
-        );
         modelBuilder.Entity<People>().Property(p => p.Id).HasIdentityOptions(startValue: 1);
         modelBuilder.Entity<People>().HasData(
             new People{
@@ -104,6 +86,25 @@ public class DataContext: DbContext {
                 Email = "Kast-er.Kuurits@gmail.com",
             }
         );
+        modelBuilder.Entity<EventPeople>().Property(p => p.Id).HasIdentityOptions(startValue: 1);
+        modelBuilder.Entity<EventPeople>().HasData(
+            new EventPeople{
+                Id = 1,
+                EventId = 1,
+                PeopleId = 1,
+            },
+            new EventPeople{
+                Id = 2,
+                EventId = 2,
+                PeopleId = 2,
+            },
+            new EventPeople{
+                Id = 3,
+                EventId = 3,
+                PeopleId = 3,
+            }
+        );
+
     }
     //docker run -d -p 5432:5432 --name my-db -e POSTGRES_PASSWORD=parool postgres
 }
