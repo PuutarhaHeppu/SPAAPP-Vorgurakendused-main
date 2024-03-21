@@ -8,7 +8,7 @@
           <DataTable :value="events" v-if="events.length > 0">
               <Column field="type" header="Nimetus" />
               <Column field="location" header="Asukoht" />
-              <Column id="Column" name="Column" header="Marken haiseb" >
+              <Column id="Column" name="Column" header="Kuupäev" >
               <template #body="{data}">
                 {{ showDate(data.date).date }}
 

@@ -29,20 +29,10 @@ const routes: Array<RouteRecordRaw> = [
     component: AddEventVue,
   },
   {
-    path: '/eventPeople',
-    name: 'Uuenda harjutust',
-    component: UpdateEventVue,
-  },
-  {
     path: '/update/:id',
     name: 'Uuenda harjutust',
     component: UpdateEventVue,
-  },
-  {
-    path: '/update/:id',
-    name: 'Uuenda harjutust',
-    component: UpdateEventVue,
-  },
+  }
 
 ];
 

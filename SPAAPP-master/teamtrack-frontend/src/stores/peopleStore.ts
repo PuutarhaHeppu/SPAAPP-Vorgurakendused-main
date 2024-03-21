@@ -1,86 +1,86 @@
-import { Event } from "../models/event.js";
+import { People } from "../models/people.js";
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import useApi, { useApiRawRequest } from "../models/api.js";
 
-export const useEventsStore = defineStore('eventsStore', () => {
-  const apiGetEvents = useApi<Event[]>('events');
-  const events = ref<Event[]>([]);
-  let allEvents: Event[] = [];
+export const usePeoplesStore = defineStore('PeoplesStore', () => {
+  const apiGetPeoples = useApi<People[]>('Peoples');
+  const Peoples = ref<People[]>([]);
+  let allPeoples: People[] = [];
 
-  const loadEvents = async () => {
-    await apiGetEvents.request();
+  const loadPeoples = async () => {
+    await apiGetPeoples.request();
 
-    if (apiGetEvents.response.value) {
-      return apiGetEvents.response.value;
+    if (apiGetPeoples.response.value) {
+      return apiGetPeoples.response.value;
     }
     return [];
   };
 
   const load = async () => {
-    allEvents = await loadEvents();
-    events.value = allEvents;
+    allPeoples = await loadPeoples();
+    Peoples.value = allPeoples;
   };
-  const getEventById = (id: number) => {
-    return allEvents.find((event) => event.id === id);
+  const getPeopleById = (id: number) => {
+    return allPeoples.find((People) => People.id === id);
   };
 
 
-  const addEvent = async (event: Event) => {
-    const apiAddEvent = useApi<Event>('events', {
+  const addPeople = async (People: People) => {
+    const apiAddPeople = useApi<People>('Peoples', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(event),
+      body: JSON.stringify(People),
     }); 
     
-    await apiAddEvent.request();
-    if (apiAddEvent.response.value) {
+    await apiAddPeople.request();
+    if (apiAddPeople.response.value) {
       load();      
     }
   };
-  const updateEvent = async (event: Event) => {
-    const apiUpdateEvent = useApi<Event>('events/' + event.id, {
+  const updatePeople = async (People: People) => {
+    const apiUpdatePeople = useApi<People>('Peoples/' + People.id, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(event),
+      body: JSON.stringify(People),
     });
 
-    await apiUpdateEvent.request();
-    if (apiUpdateEvent.response.value) {
+    await apiUpdatePeople.request();
+    if (apiUpdatePeople.response.value) {
       load();
     }    
   };
 
 
-  const deleteEvent = async (event: Event) => {
-    const deleteEventRequest = useApiRawRequest(`events/${event.id}`, {
+  const deletePeople = async (People: People) => {
+    const deletePeopleRequest = useApiRawRequest(`Peoples/${People.id}`, {
       method: 'DELETE',
     });
 
-    const res = await deleteEventRequest();
+    const res = await deletePeopleRequest();
 
     if (res.status === 204) {
-      let id = events.value.indexOf(event);
+      let id = Peoples.value.indexOf(People);
 
       if (id !== -1) {
-        events.value.splice(id, 1);
+        Peoples.value.splice(id, 1);
       }
 
-      id = events.value.indexOf(event);
+      id = Peoples.value.indexOf(People);
 
       if (id !== -1) {
-        events.value.splice(id, 1);
+        Peoples.value.splice(id, 1);
       }
     }
   };
 
-  return { events, load, getEventById, addEvent, updateEvent, deleteEvent };
+  return { Peoples, load, getPeopleById, addPeople, updatePeople, deletePeople };
 });
 
 

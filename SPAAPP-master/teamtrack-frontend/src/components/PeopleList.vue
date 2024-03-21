@@ -7,31 +7,8 @@
             <h1 class="font-bold">{{ title }}</h1>
             <DataTable :value="events" v-if="events.length > 0">
                 <Column field="type" header="Id" />
-                <Column field="location" header="Asukoht" />
-                <Column id="Column" name="Column" header="Kuupäev" >
-                <template #body="{data}">
-                  {{ showDate(data.date).date }}
-  
-                </template>
-                </Column>
-                <Column v-if="!isAthlete">
-                    <template #body="{ data }">
-                        <router-link class="ring"
-                                     :to="'update/' + data.id">
-                            ⭮
-                        </router-link>
-  
-                        <button class="delete"
-                                @click="remove(data)">
-                            Delete
-                        </button>
-  
-                        <button class="details"
-                                @click="showDetails(data)">
-                            Details
-                        </button>
-                    </template>
-                </Column>
+                <Column field="Username" header="Username" />
+                <Column field="Column" header="Email" />
             </DataTable>
             <div v-else>Sündmused puuduvad</div>
         </div>
@@ -78,25 +55,6 @@
   
   const eventsStore = useEventsStore();
   const { events } = storeToRefs(eventsStore);
-  
-  onMounted(() => {
-    eventsStore.load();
-  });
-  
-  const showDate = (isoString: string) =>{
-    const dateTime = new Date(isoString);
-    const timeZone = "UTC";
-    const optionsDate: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit", timeZone: timeZone};
-    const optionsTime: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: timeZone};
-  
-    return{
-      date: dateTime.toLocaleDateString(undefined, optionsDate),
-      time: dateTime.toLocaleTimeString(undefined, optionsTime)
-    };
-  };
-  const remove = (event: Event) => {
-    eventsStore.deleteEvent(event);
-  };
   
   </script>
   
