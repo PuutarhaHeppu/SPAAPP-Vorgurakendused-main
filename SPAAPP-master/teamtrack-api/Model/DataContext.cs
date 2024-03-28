@@ -89,7 +89,7 @@ public class DataContext: DbContext {
         modelBuilder.Entity<EventPeople>().Property(p => p.Id).HasIdentityOptions(startValue: 1);
         modelBuilder.Entity<EventPeople>().HasData(
             new EventPeople{
-                Id = 1,
+                Id = 4,
                 EventId = 1,
                 PeopleId = 1,
             },

@@ -8,7 +8,7 @@ namespace teamtrack_api.Controllers;
     public EventPeopleController(DataContext c)  {
         context = c;
     }
-    [HttpGet] public IActionResult GetEventPeople() {
+    [HttpGet] public IActionResult GetEventPeopleList() {
         return Ok(context.EventPeopleList);
     }   
     [HttpPost] public IActionResult Create([FromBody] EventPeople e) {
@@ -16,7 +16,7 @@ namespace teamtrack_api.Controllers;
         if (dbEvent == null) {
             context.EventPeopleList?.Add(e); 
             context.SaveChanges();
-            return CreatedAtAction(nameof(GetEventPeople), new { e.Id }, e);
+            return CreatedAtAction(nameof(GetEventPeopleList), new { e.Id }, e);
         }
         return Conflict();
     }

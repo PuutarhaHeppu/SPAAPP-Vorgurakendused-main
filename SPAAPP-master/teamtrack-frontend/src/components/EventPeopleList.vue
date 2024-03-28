@@ -5,38 +5,12 @@
             <div class="hidden md:block">
             </div>
             <h1 class="font-bold">{{ title }}</h1>
-            <DataTable :value="EventPeoples" v-if="EventPeoples.length > 0">
-                <Column field="type" header="Nimetus" />
-                <Column field="location" header="Asukoht" />
-                <Column id="Column" name="Column" header="Kuupäev" >
-                <template #body="{data}">
-                  {{ showDate(data.date).date }}
-  
-                </template>
-                </Column>
-                <Column class="w-30" header="Kellaaeg">
-                <template #body="{data}">
-                  {{ showDate(data.date).time }}
-  
-                </template>
+            <DataTable :value="EventPeople" v-if="EventPeople.length > 0">
+                <Column field="id" header="id" />
+                <Column field="peopleid" header="Peopleid" />
+                <Column field="eventid" header="Eventid" >
                 </Column>
                 <Column v-if="!isAthlete">
-                    <template #body="{ data }">
-                        <router-link class="ring"
-                                     :to="'update/' + data.id">
-                            ⭮
-                        </router-link>
-  
-                        <button class="delete"
-                                @click="remove(data)">
-                            Delete
-                        </button>
-  
-                        <button class="details"
-                                @click="showDetails(data)">
-                            Details
-                        </button>
-                    </template>
                 </Column>
             </DataTable>
             <div v-else>Sündmused puuduvad</div>
@@ -83,7 +57,7 @@
   };
   
   const EventPeopleStore = useEventPeopleStore();
-  const { EventPeoples } = storeToRefs(EventPeopleStore);
+  const { EventPeople } = storeToRefs(EventPeopleStore);
   
   onMounted(() => {
     EventPeopleStore.load();
