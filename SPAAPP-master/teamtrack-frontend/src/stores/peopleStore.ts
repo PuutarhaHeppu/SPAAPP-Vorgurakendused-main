@@ -3,31 +3,31 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import useApi, { useApiRawRequest } from "../models/api.js";
 
-export const usePeoplesStore = defineStore('PeoplesStore', () => {
-  const apiGetPeoples = useApi<People[]>('Peoples');
-  const Peoples = ref<People[]>([]);
-  let allPeoples: People[] = [];
+export const usePeopleStore = defineStore('PeopleStore', () => {
+  const apiGetPeople = useApi<People[]>('People');
+  const People = ref<People[]>([]);
+  let allPeople: People[] = [];
 
-  const loadPeoples = async () => {
-    await apiGetPeoples.request();
+  const loadPeople = async () => {
+    await apiGetPeople.request();
 
-    if (apiGetPeoples.response.value) {
-      return apiGetPeoples.response.value;
+    if (apiGetPeople.response.value) {
+      return apiGetPeople.response.value;
     }
     return [];
   };
 
   const load = async () => {
-    allPeoples = await loadPeoples();
-    Peoples.value = allPeoples;
+    allPeople = await loadPeople();
+    People.value = allPeople;
   };
   const getPeopleById = (id: number) => {
-    return allPeoples.find((People) => People.id === id);
+    return allPeople.find((People) => People.id === id);
   };
 
 
   const addPeople = async (People: People) => {
-    const apiAddPeople = useApi<People>('Peoples', {
+    const apiAddPeople = useApi<People>('People', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -42,7 +42,7 @@ export const usePeoplesStore = defineStore('PeoplesStore', () => {
     }
   };
   const updatePeople = async (People: People) => {
-    const apiUpdatePeople = useApi<People>('Peoples/' + People.id, {
+    const apiUpdatePeople = useApi<People>('People/' + People.id, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -59,28 +59,28 @@ export const usePeoplesStore = defineStore('PeoplesStore', () => {
 
 
   const deletePeople = async (People: People) => {
-    const deletePeopleRequest = useApiRawRequest(`Peoples/${People.id}`, {
+    const deletePeopleRequest = useApiRawRequest(`People/${People.id}`, {
       method: 'DELETE',
     });
 
     const res = await deletePeopleRequest();
 
     if (res.status === 204) {
-      let id = Peoples.value.indexOf(People);
+      let id = People.value.indexOf(People);
 
       if (id !== -1) {
-        Peoples.value.splice(id, 1);
+        People.value.splice(id, 1);
       }
 
-      id = Peoples.value.indexOf(People);
+      id = People.value.indexOf(People);
 
       if (id !== -1) {
-        Peoples.value.splice(id, 1);
+        People.value.splice(id, 1);
       }
     }
   };
 
-  return { Peoples, load, getPeopleById, addPeople, updatePeople, deletePeople };
+  return { People, load, getPeopleById, addPeople, updatePeople, deletePeople };
 });
 
 
