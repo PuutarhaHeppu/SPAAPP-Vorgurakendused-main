@@ -8,7 +8,7 @@ namespace teamtrack_api.Controllers;
     public PeopleController(DataContext c)  {
         context = c;
     }
-    [HttpGet] public IActionResult GetPeopleList() {
+    [HttpGet] public IActionResult GetPeople() {
         return Ok(context.PeopleList);
     }   
     [HttpPost] public IActionResult Create([FromBody] People e) {
@@ -16,7 +16,7 @@ namespace teamtrack_api.Controllers;
         if (dbEvent == null) {
             context.PeopleList?.Add(e); 
             context.SaveChanges();
-            return CreatedAtAction(nameof(GetPeopleList), new { e.Id }, e);
+            return CreatedAtAction(nameof(GetPeople), new { e.Id }, e);
         }
         return Conflict();
     }
@@ -27,9 +27,9 @@ namespace teamtrack_api.Controllers;
         return NoContent();
     }
     [HttpDelete("{id}")] public IActionResult Delete(int id) {
-        var PeopleListToDelete = context.PeopleList?.Find(id);
-        if (PeopleListToDelete == null) return NotFound();
-        context.PeopleList?.Remove(PeopleListToDelete);
+        var peopleToDelete = context.PeopleList?.Find(id);
+        if (peopleToDelete == null) return NotFound();
+        context.PeopleList?.Remove(peopleToDelete);
         context.SaveChanges();
         return NoContent();
     }

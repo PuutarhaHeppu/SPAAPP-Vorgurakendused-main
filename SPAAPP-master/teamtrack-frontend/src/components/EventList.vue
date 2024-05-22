@@ -38,6 +38,14 @@
                       </button>
                   </template>
               </Column>
+              <Column v-if="isAthlete">
+                <template #body="{ data }">
+                  <button class="join"
+                          @click="join(data)">
+                        Participate
+                  </button>
+                </template>
+              </Column>
           </DataTable>
           <div v-else>Sündmused puuduvad</div>
       </div>
@@ -57,7 +65,9 @@
 
 <script setup lang="ts">
 import { Event } from '@/models/event';
+import { People } from '@/models/people';
 import { useEventsStore } from "@/stores/eventsStore";
+import { usePeopleStore } from '@/stores/peopleStore';
 import { storeToRefs } from "pinia";
 import { defineProps, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
@@ -76,11 +86,17 @@ defineProps<{ title: String, isAthlete: Boolean }>();
 
 const showPopup = ref(false);
 const selectedEvent = ref({});
+const selectedPeople = ref({})
 
 const showDetails = (event: Event) => {
   selectedEvent.value = event;
   showPopup.value = true;
 };
+
+const join = (people: People) => {
+  selectedPeople.value = people;
+  showPopup.value = true;
+}
 
 const eventsStore = useEventsStore();
 const { events } = storeToRefs(eventsStore);
@@ -111,6 +127,11 @@ const remove = (event: Event) => {
 .min-h-screen {
   background-color: #f8fafc; /* A softer shade of grey */
   color: #111827; /* Dark grey for better readability */
+}
+
+.join{
+  background-color: green;
+  color: black;
 }
 
 /* Typography and spacing */
